@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Github, Menu, X } from "lucide-react";
 import { useState } from "react";
-import openerLogoAsset from "@/assets/logo-primary-color.svg.asset.json";
+import openerLogo from "@/assets/logo_primary_color.svg";
 
 
 const navLinks = [
@@ -20,7 +20,7 @@ const Header = () => {
           {/* Logo */}
           <a href="/" className="flex items-center" aria-label="Opener home">
             <img
-              src={openerLogoAsset.url}
+              src={openerLogo}
               alt="Opener logo"
               className="h-16 w-auto object-contain"
             />
@@ -29,7 +29,7 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-16">
             {navLinks.map((link) => (
-              <a 
+              <a
                 key={link.label}
                 href={link.href}
                 onClick={(e) => {
@@ -61,7 +61,7 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             className="md:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
@@ -79,7 +79,7 @@ const Header = () => {
           <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a 
+                <a
                   key={link.label}
                   href={link.href}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"

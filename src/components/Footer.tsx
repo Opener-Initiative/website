@@ -1,5 +1,6 @@
 import { Github, Linkedin } from "lucide-react";
-import bmftrLogo from "@/assets/BMFTR_en_DTP_CMYK_gef_durch.svg.asset.json";
+import bmftrLogo from "@/assets/BMFTR_en_DTP_CMYK_gef_durch.svg";
+import openerLogoWhite from "@/assets/logo_primary_white.svg";
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center">
-              <img src="/logo-primary-white.svg" alt="Opener" className="h-16 w-auto -ml-4" />
+              <img src={openerLogoWhite} alt="Opener" className="h-16 w-auto -ml-4" />
             </div>
             <p className="text-background/70 mb-6 max-w-md">
               An open reference implementation of the NR+ protocol stack. From the community, for the community.
@@ -44,7 +45,7 @@ const Footer = () => {
               aria-label="German Federal Ministry of Research, Technology and Space (BMFTR)"
             >
               <img
-                src={bmftrLogo.url}
+                src={bmftrLogo}
                 alt="With funding from the German Federal Ministry of Research, Technology and Space (BMFTR)"
                 className="w-[180px] h-auto"
               />

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Github } from "lucide-react";
+import openerLogoWhite from "@/assets/logo_primary_white.svg";
 
 const Hero = () => {
   return (
@@ -12,7 +13,7 @@ const Hero = () => {
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground tracking-tight">
             <img
-              src="/logo-primary-white.svg"
+              src={openerLogoWhite}
               alt="Opener"
               className="h-44 lg:h-64 w-auto mx-auto"
             />
