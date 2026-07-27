@@ -1,0 +1,13 @@
+{
+  "name": "Opener Initiative Website",
+  "image": "oven/bun:1",
+  "forwardPorts": [
+    8080
+  ],
+  "portsAttributes": {
+    "8080": {
+      "label": "Vite dev server",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}
