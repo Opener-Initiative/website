@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { BookOpen, FolderGit2, MessagesSquare, HeartHandshake } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Contribute = () => {
   const contributeListRef = useRef(null);
@@ -66,15 +67,16 @@ const Contribute = () => {
         </div>
 
         <div className="flex justify-center mt-16">
-          <a
-            href="https://github.com/Opener-Initiative/opener?tab=contributing-ov-file#contributing-to-opener"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-card border border-border text-card-foreground hover:border-primary hover:shadow-md transition-colors"
-          >
-            <BookOpen className="w-5 h-5" />
-            Read the Contribution Guidelines
-          </a>
+          <Button variant="tech" size="lg" asChild>
+            <a
+              href="https://github.com/Opener-Initiative/opener?tab=contributing-ov-file#contributing-to-opener"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BookOpen />
+              Read the Contribution Guidelines
+            </a>
+          </Button>
         </div>
       </div>
     </section>
