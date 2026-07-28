@@ -1,6 +1,6 @@
 import { RadioTower, Share2 } from "lucide-react";
 
-const OpenSource = () => {
+const DecentralizedByDesign = () => {
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container px-4">
@@ -56,4 +56,4 @@ const OpenSource = () => {
   );
 };
 
-export default OpenSource;
+export default DecentralizedByDesign;

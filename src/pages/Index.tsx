@@ -2,8 +2,8 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Technology from "@/components/Technology";
 import ProtocolStack from "@/components/ProtocolStack";
-import OpenSource from "@/components/OpenSource";
-import Governance from "@/components/Governance";
+import DecentralizedByDesign from "@/components/DecentralizedByDesign";
+import GuidingPrinciples from "@/components/GuidingPrinciples";
 import Contribute from "@/components/Contribute";
 import GetStarted from "@/components/GetStarted";
 import Footer from "@/components/Footer";
@@ -18,10 +18,10 @@ const Index = () => {
         <section id="technology">
           <Technology />
         </section>
-        <OpenSource />
+        <DecentralizedByDesign />
         <ProtocolStack />
         <section id="principles">
-          <Governance />
+          <GuidingPrinciples />
         </section>
         <section id="contribute">
           <Contribute />

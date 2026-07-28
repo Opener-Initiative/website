@@ -1,4 +1,4 @@
-const Governance = () => {
+const GuidingPrinciples = () => {
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container px-4">
@@ -62,4 +62,4 @@ const Governance = () => {
   );
 };
 
-export default Governance;
+export default GuidingPrinciples;
