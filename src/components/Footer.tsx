@@ -63,7 +63,7 @@ const Footer = () => {
             Impressum
           </a>
           {" · "}
-          <a href="/datenschutz" className="text-background underline">
+          <a href="/privacy-policy" className="text-background underline">
             Privacy policy
           </a>
         </div>

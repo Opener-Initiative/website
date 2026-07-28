@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 
-const Datenschutz = () => {
+const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -18,4 +18,4 @@ const Datenschutz = () => {
   );
 };
 
-export default Datenschutz;
+export default PrivacyPolicy;
