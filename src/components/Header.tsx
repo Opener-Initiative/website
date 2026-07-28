@@ -1,45 +1,54 @@
 import { Button } from "@/components/ui/button";
 import { Github, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import openerLogo from "@/assets/logo_primary_color.svg";
 
 
 const navLinks = [
-  { label: "Technology", href: "#technology" },
-  { label: "Principles", href: "#principles" },
-  { label: "Contribute", href: "#contribute" },
+  { label: "Technology", to: "/#technology" },
+  { label: "Principles", to: "/#principles" },
+  { label: "Contribute", to: "/#contribute" },
 ];
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // The sections live on the home page only, so links from the legal pages
+  // route there first and we scroll once the target has mounted. Without a
+  // hash we start at the top, the way a full page load used to.
+  useEffect(() => {
+    if (location.hash) {
+      document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, [location]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container px-4">
         <nav className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="/" className="flex items-center" aria-label="Opener home">
+          <Link to="/" className="flex items-center" aria-label="Opener home">
             <img
               src={openerLogo}
               alt="Opener logo"
               className="h-16 w-auto object-contain"
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-16">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                to={link.to}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -54,9 +63,9 @@ const Header = () => {
             <Button
               size="sm"
               className="bg-primary text-primary-foreground hover:bg-primary/90"
-              onClick={() => document.querySelector('#get-started')?.scrollIntoView({ behavior: 'smooth' })}
+              asChild
             >
-              Get Started
+              <Link to="/#get-started">Get Started</Link>
             </Button>
           </div>
 
@@ -79,18 +88,14 @@ const Header = () => {
           <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
+                  to={link.to}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setMobileMenuOpen(false);
-                    document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
                 <Button variant="outline" size="sm" asChild>
@@ -102,12 +107,11 @@ const Header = () => {
                 <Button
                   size="sm"
                   className="bg-primary text-primary-foreground hover:bg-primary/90"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    document.querySelector('#get-started')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                  asChild
                 >
-                  Get Started
+                  <Link to="/#get-started" onClick={() => setMobileMenuOpen(false)}>
+                    Get Started
+                  </Link>
                 </Button>
               </div>
             </div>
