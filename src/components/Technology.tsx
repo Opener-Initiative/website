@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { NoBreak } from "./NoBreak";
 
 const mMTCFeatures = [
   "Up to 1 million devices/km²",
@@ -21,8 +22,8 @@ const Technology = () => {
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">What is NR+?</h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            NR+, formally DECT-2020 NR, is a radio interface technology specified by ETSI in the TS 103 636 series of
-            standards. Since late 2021, the ITU-R recognizes it as part of the IMT-2020 (5G) family for fulfilling the
+            NR+, formally <NoBreak>DECT-2020 NR</NoBreak>, is a radio interface technology specified by ETSI in the <NoBreak>TS 103 636</NoBreak> series of
+            standards. Since late 2021, the <NoBreak>ITU-R</NoBreak> recognizes it as part of the <NoBreak>IMT-2020 (5G)</NoBreak> family for fulfilling the
             requirements for the mMTC and URLLC usage scenarios. The technology serves a wide variety of use cases,
             powering large-scale, high-density network deployments as well as cable-replacement solutions for
             mission-critical applications.

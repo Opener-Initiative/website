@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BookOpen, FolderGit2, MessagesSquare, HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { NoBreak } from "./NoBreak";
 
 const Contribute = () => {
   const contributeListRef = useRef(null);
@@ -39,7 +40,7 @@ const Contribute = () => {
               <FolderGit2 className="w-5 h-5 text-secondary" />
             </div>
             <p className="text-base leading-relaxed text-muted-foreground">
-              Optionally share your implementation of ETSI TS 103 636 with other members, publicly or privately within
+              Optionally share your implementation of ETSI <NoBreak>TS 103 636</NoBreak> with other members, publicly or privately within
               the organization. Contributors are free to choose the license that best suits their existing work.
             </p>
           </div>

@@ -1,3 +1,5 @@
+import { NoBreak } from "./NoBreak";
+
 const GuidingPrinciples = () => {
   return (
     <section className="py-16 md:py-24 bg-background">
@@ -20,9 +22,9 @@ const GuidingPrinciples = () => {
               <h3 className="text-[19px] font-semibold text-card-foreground mb-2">Ready for commercial use</h3>
               <p className="text-base leading-relaxed text-muted-foreground">
                 Opener not only fosters academic research but is also suitable for integration into demanding commercial
-                products. For this reason, we chose the Apache 2.0 license for the project. Apache 2.0 is a
+                products. For this reason, we chose the <NoBreak>Apache 2.0</NoBreak> license for the project. <NoBreak>Apache 2.0</NoBreak> is a
                 business-friendly, OSI-approved permissive software license with no copyleft provisions that restrict
-                commercial use. In addition to broad usage rights, Apache 2.0 includes an express grant of patent rights
+                commercial use. In addition to broad usage rights, <NoBreak>Apache 2.0</NoBreak> includes an express grant of patent rights
                 from contributors, providing legal protection and peace of mind for adopters.
               </p>
             </div>

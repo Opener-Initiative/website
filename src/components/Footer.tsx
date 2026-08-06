@@ -1,6 +1,7 @@
 import { Github, Linkedin } from "lucide-react";
 import bmftrLogo from "@/assets/BMFTR_en_DTP_CMYK_gef_durch.svg?url";
 import openerLogoWhite from "@/assets/logo_primary_white.svg?url";
+import { NoBreak } from "./NoBreak";
 
 const Footer = () => {
   return (
@@ -51,7 +52,7 @@ const Footer = () => {
               />
             </a>
             <p className="mt-4 max-w-md text-sm text-background/50">
-              The Opener Initiative is supported by the OpenDECT-X project, funded by the German Federal Ministry of
+              The Opener Initiative is supported by the <NoBreak>OpenDECT-X</NoBreak> project, funded by the German Federal Ministry of
               Research, Technology and Space (BMFTR) under grant no. 01MK26002A.
             </p>
           </div>

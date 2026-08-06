@@ -1,4 +1,5 @@
 import { RadioTower, Share2 } from "lucide-react";
+import { NoBreak } from "./NoBreak";
 
 const DecentralizedByDesign = () => {
   return (
@@ -31,9 +32,9 @@ const DecentralizedByDesign = () => {
                 </div>
                 <h3 className="font-semibold text-foreground mb-1">Wide Spectrum Access</h3>
                 <p className="text-base text-muted-foreground leading-relaxed">
-                  Beyond IMT and ISM bands, NR+ has access to license-exempt spectrum in the 1880–1930 MHz range, parts
+                  Beyond IMT and ISM bands, NR+ has access to license-exempt spectrum in the <NoBreak>1880–1930 MHz</NoBreak> range, parts
                   of which are assigned exclusively to DECT technologies in many markets. EU Implementing Decision
-                  2025/2425 harmonizes shared use of the 3.8–4.2 GHz band, opening it to future NR+ deployments subject
+                  2025/2425 harmonizes shared use of the <NoBreak>3.8–4.2 GHz</NoBreak> band, opening it to future NR+ deployments subject
                   to national assignments.
                 </p>
               </div>

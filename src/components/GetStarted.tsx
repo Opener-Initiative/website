@@ -1,12 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Github, Lightbulb, ScrollText } from "lucide-react";
+import { NoBreak } from "./NoBreak";
 
 const resources = [
   {
     icon: ScrollText,
     title: "Standards Documents",
-    description:
-      "Read the DECT-2020 NR specification, the ETSI TS 103 636 series that defines the protocol Opener implements.",
+    description: (
+      <>
+        Read the <NoBreak>DECT-2020 NR</NoBreak> specification, the ETSI <NoBreak>TS 103 636</NoBreak> series that defines the protocol Opener implements.
+      </>
+    ),
     buttons: [
       {
         label: "Browse ETSI Standards",
