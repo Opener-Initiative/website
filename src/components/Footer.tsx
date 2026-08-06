@@ -1,4 +1,5 @@
 import { Github, Linkedin } from "lucide-react";
+import { SiMatrix } from "@icons-pack/react-simple-icons";
 import bmftrLogo from "@/assets/BMFTR_en_DTP_CMYK_gef_durch.svg?url";
 import openerLogoWhite from "@/assets/logo_primary_white.svg?url";
 import { NoBreak } from "./NoBreak";
@@ -34,6 +35,15 @@ const Footer = () => {
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href="https://matrix.to/#/#opener-initiative:matrix.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
+                aria-label="Matrix"
+              >
+                <SiMatrix className="w-5 h-5" />
               </a>
             </div>
           </div>
