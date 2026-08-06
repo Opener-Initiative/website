@@ -13,17 +13,23 @@ import "@/index.css";
 
 const SITE_NAME = "Opener Initiative";
 
+// Placeholder until the designer delivers the real site-wide card.
+const DEFAULT_OG_IMAGE = "https://lovable.dev/opengraph-image-p98pqg.png";
+
 interface Props {
   /** Page name without the site suffix, e.g. "Impressum". Omit on the home page. */
   title?: string;
   description?: string;
   class?: string;
+  /** Path or URL of the og:image; made absolute here. Omit for the site-wide default. */
+  ogImage?: string;
 }
 
 const {
   title,
   description = "Building Opener, an open reference implementation of the NR+ protocol stack.",
   class: wrapperClass = "min-h-screen",
+  ogImage = DEFAULT_OG_IMAGE,
 } = Astro.props;
 
 const pageTitle = title ? `${title} · ${SITE_NAME}` : SITE_NAME;
@@ -41,11 +47,12 @@ const pageTitle = title ? `${title} · ${SITE_NAME}` : SITE_NAME;
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/rss.xml" />
 
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
   </head>
   <body>
     <div class={wrapperClass}>

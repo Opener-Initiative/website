@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { ArrowRight } from "lucide-react";
+import { formatDate } from "@/lib/news";
+
+interface Props {
+  entry: CollectionEntry<"news">;
+}
+
+const { entry } = Astro.props;
+const { title, description, pubDate, image } = entry.data;
+const titleId = `news-title-${entry.id.replaceAll("/", "-")}`;
+---
+
+<a
+  href={`/news/${entry.id}/`}
+  aria-labelledby={titleId}
+  class="group bg-card rounded-xl border border-border overflow-hidden flex flex-col hover:shadow-lg transition-all duration-300"
+>
+  {
+    image && (
+      <Image
+        src={image}
+        alt=""
+        width={800}
+        class="w-full aspect-[1200/630] object-cover"
+      />
+    )
+  }
+  <div class="p-6 flex flex-col flex-grow gap-2">
+    <h3 id={titleId} class="font-semibold text-foreground">{title}</h3>
+    <time
+      datetime={pubDate.toISOString()}
+      class="text-sm text-muted-foreground"
+    >
+      {formatDate(pubDate)}
+    </time>
+    <p class="text-sm text-muted-foreground line-clamp-3">{description}</p>
+    <ArrowRight
+      className="w-4 h-4 mt-auto self-end text-muted-foreground group-hover:text-foreground transition-colors"
+      aria-hidden="true"
+    />
+  </div>
+</a>

@@ -1,0 +1,38 @@
+---
+import { ArrowRight } from "lucide-react";
+import NewsCard from "@/components/NewsCard.astro";
+import { getPublishedNews } from "@/lib/news";
+
+const latestNews = (await getPublishedNews()).slice(0, 3);
+---
+
+{
+  latestNews.length > 0 && (
+    <section id="news" class="py-16 md:py-24 bg-background">
+      <div class="container px-4">
+        <div class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-card-foreground mb-4">
+            What's New
+          </h2>
+          <p class="text-lg text-muted-foreground">
+            Follow along as the open NR+ stack takes shape.
+          </p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+          {latestNews.map((entry) => (
+            <NewsCard entry={entry} />
+          ))}
+        </div>
+        <div class="text-center mt-10">
+          <a
+            href="/news/"
+            class="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            To the newsroom
+            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}

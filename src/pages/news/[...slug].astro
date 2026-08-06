@@ -1,0 +1,56 @@
+---
+import { render } from "astro:content";
+import { getImage, Image } from "astro:assets";
+import type { InferGetStaticPropsType, GetStaticPaths } from "astro";
+import Base from "@/layouts/Base.astro";
+import { formatDate, getPublishedNews } from "@/lib/news";
+
+export const getStaticPaths = (async () => {
+  const entries = await getPublishedNews();
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry } = Astro.props;
+const { title, description, pubDate, image, imageAlt } = entry.data;
+const { Content } = await render(entry);
+
+const ogImage = image
+  ? (await getImage({ src: image, width: 1200, format: "webp" })).src
+  : undefined;
+---
+
+<Base
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  class="min-h-screen flex flex-col"
+>
+  <main class="flex-1 container px-4 py-32">
+    <article class="max-w-3xl mx-auto">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold tracking-tight mb-4">{title}</h1>
+        <time datetime={pubDate.toISOString()} class="text-muted-foreground">
+          {formatDate(pubDate)}
+        </time>
+      </header>
+      {
+        image && (
+          <Image
+            src={image}
+            alt={imageAlt ?? ""}
+            class="w-full rounded-lg mb-8"
+            loading="eager"
+          />
+        )
+      }
+      <div class="prose mx-auto">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Base>

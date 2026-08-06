@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Technology", href: "/#technology" },
   { label: "Principles", href: "/#principles" },
   { label: "Contribute", href: "/#contribute" },
+  { label: "News", href: "/#news" },
 ];
 
 const Header = () => {

@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
+import typography from "@tailwindcss/typography";
 
 export default {
 	darkMode: ["class"],
@@ -64,6 +65,32 @@ export default {
 				lg: 'var(--shadow-lg)',
 				xl: 'var(--shadow-xl)',
 			},
+			// Map the prose palette onto the design-system tokens in src/index.css
+			// instead of the plugin's fixed gray scale. The tokens flip with the
+			// `.dark` class, so prose follows the theme without `prose-invert`.
+			typography: {
+				DEFAULT: {
+					css: {
+						'--tw-prose-body': 'hsl(var(--foreground))',
+						'--tw-prose-headings': 'hsl(var(--foreground))',
+						'--tw-prose-lead': 'hsl(var(--muted-foreground))',
+						'--tw-prose-links': 'hsl(var(--primary))',
+						'--tw-prose-bold': 'hsl(var(--foreground))',
+						'--tw-prose-counters': 'hsl(var(--muted-foreground))',
+						'--tw-prose-bullets': 'hsl(var(--muted-foreground))',
+						'--tw-prose-hr': 'hsl(var(--border))',
+						'--tw-prose-quotes': 'hsl(var(--foreground))',
+						'--tw-prose-quote-borders': 'hsl(var(--border))',
+						'--tw-prose-captions': 'hsl(var(--muted-foreground))',
+						'--tw-prose-kbd': 'hsl(var(--foreground))',
+						'--tw-prose-code': 'hsl(var(--foreground))',
+						'--tw-prose-pre-code': 'hsl(var(--foreground))',
+						'--tw-prose-pre-bg': 'hsl(var(--muted))',
+						'--tw-prose-th-borders': 'hsl(var(--border))',
+						'--tw-prose-td-borders': 'hsl(var(--border))',
+					}
+				}
+			},
 			fontFamily: {
 				sans: [
 					'Inter',
@@ -92,5 +119,5 @@ export default {
 			}
 		}
 	},
-	plugins: [tailwindcssAnimate],
+	plugins: [tailwindcssAnimate, typography],
 } satisfies Config;
