@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const Contribute = () => {
   const contributeListRef = useRef(null);
-  const [contributeRevealed, setContributeRevealed] = useState(false);
+  const [contributeRevealed, setContributeRevealed] = useState(true);
   useEffect(() => {
     const el = contributeListRef.current;
     if (!el) return;

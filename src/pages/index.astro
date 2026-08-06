@@ -1,0 +1,28 @@
+---
+import Base from "@/layouts/Base.astro";
+import Hero from "@/components/Hero";
+import Technology from "@/components/Technology";
+import ProtocolStack from "@/components/ProtocolStack";
+import DecentralizedByDesign from "@/components/DecentralizedByDesign";
+import GuidingPrinciples from "@/components/GuidingPrinciples";
+import Contribute from "@/components/Contribute";
+import GetStarted from "@/components/GetStarted";
+---
+
+<Base>
+  <main>
+    <Hero />
+    <section id="technology">
+      <Technology />
+    </section>
+    <DecentralizedByDesign />
+    <ProtocolStack client:visible />
+    <section id="principles">
+      <GuidingPrinciples />
+    </section>
+    <section id="contribute">
+      <Contribute client:visible />
+    </section>
+    <GetStarted />
+  </main>
+</Base>

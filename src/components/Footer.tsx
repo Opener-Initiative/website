@@ -1,7 +1,6 @@
 import { Github, Linkedin } from "lucide-react";
-import { Link } from "react-router-dom";
-import bmftrLogo from "@/assets/BMFTR_en_DTP_CMYK_gef_durch.svg";
-import openerLogoWhite from "@/assets/logo_primary_white.svg";
+import bmftrLogo from "@/assets/BMFTR_en_DTP_CMYK_gef_durch.svg?url";
+import openerLogoWhite from "@/assets/logo_primary_white.svg?url";
 
 const Footer = () => {
   return (
@@ -60,13 +59,13 @@ const Footer = () => {
 
         <div className="border-t border-background/20 mt-12 pt-8 text-center text-background/50 text-sm">
           © 2026 Opener Initiative{" · "}
-          <Link to="/impressum" className="text-background underline">
+          <a href="/impressum/" className="text-background underline">
             Impressum
-          </Link>
+          </a>
           {" · "}
-          <Link to="/privacy-policy" className="text-background underline">
+          <a href="/privacy-policy/" className="text-background underline">
             Privacy policy
-          </Link>
+          </a>
         </div>
       </div>
     </footer>

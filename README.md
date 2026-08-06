@@ -10,14 +10,14 @@ Otherwise, with [Bun](https://bun.com) installed:
 
 ```sh
 bun install      # install dependencies
-bun run dev      # start Vite dev server at http://localhost:8080
+bun run dev      # start Astro dev server at http://localhost:8080
 ```
 
 Other useful commands include:
 
 ```sh
 bun run build    # production build -> dist/
-bun run test     # run tests
+bun run preview  # serve the production build locally
 bun run lint     # lint
 ```
 
@@ -25,7 +25,7 @@ bun run lint     # lint
 
 This project is built with:
 
-- Vite
+- Astro
 - TypeScript
 - React
 - shadcn-ui

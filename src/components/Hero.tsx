@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Github } from "lucide-react";
-import openerLogoWhite from "@/assets/logo_primary_white.svg";
+import openerLogoWhite from "@/assets/logo_primary_white.svg?url";
 
 const Hero = () => {
   return (
