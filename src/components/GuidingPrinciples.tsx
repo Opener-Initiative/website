@@ -2,7 +2,7 @@ import { NoBreak } from "./NoBreak";
 
 const GuidingPrinciples = () => {
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section id="principles" className="py-16 md:py-24 bg-background">
       <div className="container px-4">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Guiding Principles</h2>
