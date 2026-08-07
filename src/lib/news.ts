@@ -7,10 +7,20 @@ import type { CollectionEntry } from "astro:content";
  * drafts can never leak into one of them.
  */
 export async function getPublishedNews(): Promise<CollectionEntry<"news">[]> {
-  const entries = await getCollection("news", ({ data }) => !data.draft);
-  return entries.sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-  );
+  const entries = await getCollection("news");
+  // The <year>/<month> folders duplicate pubDate's year and month; fail the
+  // build on drift so the URL can never contradict the displayed date.
+  for (const { id, data } of entries) {
+    const expected = data.pubDate.toISOString().slice(0, 7).replace("-", "/");
+    if (!id.startsWith(`${expected}/`)) {
+      throw new Error(
+        `news/${id}: folder does not match pubDate (expected ${expected}/<slug>)`,
+      );
+    }
+  }
+  return entries
+    .filter(({ data }) => !data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 
 // Pin the formatting timezone so the rendered date is independent of the
