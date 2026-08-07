@@ -30,3 +30,18 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+
+## Project Structure
+
+```
+├── public/                static files (favicon, robots.txt)
+└── src/
+    ├── assets/            logos and images
+    ├── components/        Astro and React components
+    ├── content/           news posts
+    ├── layouts/           page shell
+    ├── lib/               shared helpers
+    ├── pages/             routes
+    ├── content.config.ts  news collection schema
+    └── index.css          global styles and light/dark themes
+```
