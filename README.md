@@ -18,6 +18,7 @@ Other useful commands include:
 ```sh
 bun run build    # production build -> dist/
 bun run preview  # serve the production build locally
+bun run check    # type-check
 bun run lint     # lint
 ```
 
