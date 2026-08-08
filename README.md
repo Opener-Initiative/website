@@ -79,7 +79,7 @@ Post text. Start headings at `##`, and reference images like this:
 Good to know:
 
 - `pubDate` is a plain date (`YYYY-MM-DD`). Posts are ordered by it, newest first, and it must agree with the post's year and month folders.
-- `image` is the post's cover picture and `imageAlt` its description for screen readers. Leave both out for a text-only post, but never one of them.
+- `image` is the post's cover picture and `imageAlt` its description for screen readers. Make it 1200 × 630 pixels, or post cards and link previews will crop it. Leave both out for a text-only post, but never one of them.
 - Add `draft: true` to the header block to hide a post from the published site.
 - A finished post appears on the home page, in the newsroom, and in the RSS feed automatically. Nothing else to edit.
 
