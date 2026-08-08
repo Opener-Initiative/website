@@ -20,8 +20,8 @@ const news = defineCollection({
         imageAlt: z.string().optional(),
         draft: z.boolean().default(false),
       })
-      .refine((d) => !d.image || !!d.imageAlt, {
-        error: "imageAlt is required when image is set",
+      .refine((d) => !!d.image === !!d.imageAlt, {
+        error: "image and imageAlt must be set together",
         path: ["imageAlt"],
       }),
 });
