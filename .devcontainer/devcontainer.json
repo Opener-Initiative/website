@@ -1,6 +1,8 @@
 {
   "name": "Opener Initiative Website",
-  "image": "oven/bun:1",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "forwardPorts": [
     8080
   ],
