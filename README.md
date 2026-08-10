@@ -1,6 +1,6 @@
 # Opener Initiative Website
 
-This repository contains the Opener Initiative's website.
+This repository contains the source code for the [Opener Initiative's website](https://opener-initiative.org).
 
 ## Getting Started
 
