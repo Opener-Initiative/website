@@ -1,7 +1,7 @@
 ---
 title: "What if wireless communication were as open as the internet itself?"
 description: "DECT NR+ has been officially standardized by ETSI since 2024 — a lean, energy-efficient radio standard for industry, building technology, and audio. Yet to this day, there is no freely available, documented reference implementation. Anyone looking to use the standard typically ends up relying on proprietary, closed-source solutions from individual vendors."
-pubDate: 2010-10-08
+pubDate: 2026-08-10
 ---
 
 DECT NR+ has been officially standardized by ETSI since 2024 — a lean, energy-efficient radio standard for industry, building technology, and audio. Yet to this day, there is no freely available, documented reference implementation. Anyone looking to use the standard typically ends up relying on proprietary, closed-source solutions from individual vendors.
