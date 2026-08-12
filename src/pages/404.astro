@@ -1,24 +1,16 @@
 ---
-import { Undo2 } from "lucide-react";
+import { Image } from "astro:assets";
 import Base from "@/layouts/Base.astro";
+import notFoundImage from "@/assets/404-not-found.png";
 ---
 
-<Base title="Page not found" class="min-h-screen flex flex-col">
-  <main
-    class="flex-1 container mt-16 px-4 py-32 flex items-center justify-center"
-  >
-    <div class="text-center">
-      <h1 class="mb-4 text-4xl font-bold">Uh oh!</h1>
-      <p class="mb-10 text-xl text-muted-foreground">
-        Page not found. Nothing to see here...
-      </p>
-      <a
-        href="/"
-        class="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-      >
-        <Undo2 className="w-4 h-4" aria-hidden="true" />
-        Return to home
-      </a>
-    </div>
+<Base title="Page not found">
+  <main class="container h-svh px-4 pt-16 flex items-center justify-center">
+    <Image
+      src={notFoundImage}
+      alt="Page not found"
+      class="w-full max-w-4xl max-h-full object-contain"
+      loading="eager"
+    />
   </main>
 </Base>
