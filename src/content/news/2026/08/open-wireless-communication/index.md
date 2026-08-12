@@ -20,6 +20,6 @@ Two things drive this, related, but with distinct roles:
 
 Each needs the other: without public funding, the foundation would not exist, because no single company has an interest in building an open solution for everyone. Without the community, the result would remain a project report.
 
-Our goal: Mot just to call for technological sovereignty, but to build it.
+Our goal: not just to call for technological sovereignty, but to build it.
 
 In the coming weeks, we will introduce the people behind this work — and show you how to get involved.
