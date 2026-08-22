@@ -1,3 +1,11 @@
+# Redirect www to the apex domain.
+# TODO: Promote to 301 once properly tested.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.opener-initiative\.org$ [NC]
+  RewriteRule ^ https://opener-initiative.org%{REQUEST_URI} [R=302,L]
+</IfModule>
+
 # Serve Astro's generated 404 page instead of Apache's default.
 ErrorDocument 404 /404.html
 
