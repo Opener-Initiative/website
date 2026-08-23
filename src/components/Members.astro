@@ -1,0 +1,142 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+/**
+ * Reference box area in px^2; a square logo renders at sqrt(BASE_AREA) per
+ * side. Sizing from area rather than height keeps a square logo and a wide
+ * word mark at comparable visual weight.
+ */
+const BASE_AREA = 4900;
+
+/**
+ * 1 equalizes box area exactly; 0 gives every logo the same height. Below 1
+ * wide word marks increase in size as compared to square logos. This also
+ * enlarges the wall overall, so retune BASE_AREA when modifying NORMALIZATION.
+ */
+const NORMALIZATION = 0.75;
+
+// Pin locale so ordering doesn't follow the build machine.
+const members = (await getCollection("members")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name, "de"),
+);
+---
+
+<section id="members" class="py-16 md:py-24 bg-background">
+  <div class="container px-4">
+    <div class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-card-foreground mb-4">
+        Who We Are
+      </h2>
+      <p class="text-muted-foreground text-lg">
+        Opener is a joint effort of academia, industry, and the open-source
+        community.
+      </p>
+    </div>
+
+    <ul class="logo-wall" role="list">
+      {
+        members.map(({ data: { name, url, logoLight, logoDark } }) => {
+          const aspect = logoLight.width / logoLight.height;
+          const h = Math.sqrt(BASE_AREA) * aspect ** (-NORMALIZATION / 2);
+          const width = Math.round(h * aspect);
+          const height = Math.round(h);
+          const hasDark = logoDark.src !== logoLight.src;
+          return (
+            <li>
+              <a
+                class:list={["logo", { "has-dark": hasDark }]}
+                style={`--w:${width}px;--h:${height}px`}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  class="logo-light"
+                  src={logoLight}
+                  alt=""
+                  width={width}
+                  height={height}
+                  loading="lazy"
+                  decoding="async"
+                />
+                {hasDark && (
+                  <Image
+                    class="logo-dark"
+                    src={logoDark}
+                    alt=""
+                    width={width}
+                    height={height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+                <span class="sr-only">{name}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .logo-wall {
+    --logo-scale: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4.5rem 4.5rem;
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+
+  .logo {
+    display: block;
+    width: calc(var(--w) * var(--logo-scale));
+    height: calc(var(--h) * var(--logo-scale));
+    transition: transform 0.18s ease;
+  }
+
+  .logo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .logo:hover,
+  .logo:focus-visible {
+    transform: scale(1.07);
+  }
+
+  .logo-dark {
+    display: none;
+  }
+  :global(.dark) .has-dark .logo-light {
+    display: none;
+  }
+  :global(.dark) .logo-dark {
+    display: block;
+  }
+
+  @media (max-width: 767px) {
+    .logo-wall {
+      --logo-scale: 0.85;
+      gap: 2.5rem 2.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo {
+      transition: none;
+    }
+    .logo:hover,
+    .logo:focus-visible {
+      transform: none;
+    }
+  }
+</style>

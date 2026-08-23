@@ -26,4 +26,18 @@ const news = defineCollection({
       }),
 });
 
-export const collections = { news };
+const members = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/members" }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      logoLight: image(),
+      // Required. A member without a dedicated dark logo must point this at
+      // the light variant explicitly, so "no dark variant" is a recorded
+      // decision rather than an omission nobody noticed.
+      logoDark: image(),
+      url: z.url(),
+    }),
+});
+
+export const collections = { news, members };
