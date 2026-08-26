@@ -39,11 +39,11 @@ This project is built with:
 └── src/
     ├── assets/            logos and images
     ├── components/        Astro and React components
-    ├── content/           news posts
+    ├── content/           news posts and member profiles
     ├── layouts/           page shell
     ├── lib/               shared helpers
     ├── pages/             routes
-    ├── content.config.ts  news collection schema
+    ├── content.config.ts  content collection schemas
     └── index.css          global styles and light/dark themes
 ```
 
@@ -84,3 +84,32 @@ Good to know:
 - A finished post appears on the home page, in the newsroom, and in the RSS feed automatically. Nothing else to edit.
 
 If something is wrong or missing, the build stops and says what and where.
+
+## Creating Member Profiles
+
+Add your profile by creating a new folder under `src/content/members/`, for example:
+
+```
+src/content/members/wey-yu/
+├── index.md         the profile
+├── logo.svg         the logo
+└── logo-dark.svg    the logo for dark mode
+```
+
+`index.md` contains YAML front matter, similar to news entries:
+
+```markdown
+---
+name: "Weyland-Yutani Corporation"
+logoLight: "./logo.svg"
+logoDark: "./logo-dark.svg"
+url: "https://example.com/"
+---
+```
+
+Good to know:
+
+- `name` is the full name, as the member writes it. It is announced by screen readers and used to sort logos alphabetically in the grid.
+- `logoLight` is the logo shown on light backgrounds, whereas `logoDark` is the one used in dark mode. If one logo works on both light and dark backgrounds, point both fields at the same file. Please provide SVG files with a transparent background and no excessive padding.
+- `url` points to the member's own website.
+- Logos are sized automatically and appear equally prominent in the grid.
