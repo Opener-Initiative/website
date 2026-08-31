@@ -18,11 +18,16 @@ const news = defineCollection({
           }),
         image: image().optional(),
         imageAlt: z.string().optional(),
+        imageCredit: z.string().optional(),
         draft: z.boolean().default(false),
       })
       .refine((d) => !!d.image === !!d.imageAlt, {
         error: "image and imageAlt must be set together",
         path: ["imageAlt"],
+      })
+      .refine((d) => !d.imageCredit || !!d.image, {
+        error: "imageCredit requires image",
+        path: ["imageCredit"],
       }),
 });
 
