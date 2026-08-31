@@ -16,7 +16,8 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { entry } = Astro.props;
-const { title, description, pubDate, image, imageAlt } = entry.data;
+const { title, description, pubDate, image, imageAlt, imageCredit } =
+  entry.data;
 const { Content } = await render(entry);
 
 const ogImage = image
@@ -41,12 +42,19 @@ const ogImage = image
       </header>
       {
         image && (
-          <Image
-            src={image}
-            alt={imageAlt ?? ""}
-            class="w-full rounded-lg mb-8"
-            loading="eager"
-          />
+          <figure class="mb-8">
+            <Image
+              src={image}
+              alt={imageAlt ?? ""}
+              class="w-full rounded-lg"
+              loading="eager"
+            />
+            {imageCredit && (
+              <figcaption class="mt-2 text-right text-sm text-muted-foreground">
+                <small>{imageCredit}</small>
+              </figcaption>
+            )}
+          </figure>
         )
       }
       <div class="prose mx-auto">
