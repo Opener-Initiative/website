@@ -1,10 +1,10 @@
 ---
 title: "DECT NR+ at the RIOT Summit and Ariel OS Community Day in Grenoble"
-description: "Grenoble, France. The place where the open-source IoT community meets. And DECT NR+ finds space on the programme twice. From 1 to 3 September, two events share the same rooms at Polytech Grenoble: the Ariel OS Community Day and the RIOT Summit. Christian Amsüss speaks on both. On Monday about the implementations, on Tuesday about the technology itself."
+description: "Grenoble, France. The place where the open-source IoT community meets. And DECT NR+ finds space on the programme twice. From 1 to 3 September, two events share the same rooms at Polytech Grenoble: the Ariel OS Community Day and the RIOT Summit. Christian Amsüss speaks on both. On Tuesday about the implementations, on Wednesday about the technology itself."
 pubDate: 2026-08-31
 ---
 
-**Grenoble, France.** The place where the open-source IoT community meets. And DECT NR+ finds space on the programme twice. From 1 to 3 September, two events share the same rooms at Polytech Grenoble: the Ariel OS Community Day and the RIOT Summit. Christian Amsüss speaks on both. On Monday about the implementations, on Tuesday about the technology itself.
+**Grenoble, France.** The place where the open-source IoT community meets. And DECT NR+ finds space on the programme twice. From 1 to 3 September, two events share the same rooms at Polytech Grenoble: the Ariel OS Community Day and the RIOT Summit. Christian Amsüss speaks on both. On Tuesday about the implementations, on Wednesday about the technology itself.
 
 What is happening there is worth a closer look. [Registration is free and still open.](https://tickets.riot-os.org/summit26/)
 
