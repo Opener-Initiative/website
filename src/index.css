@@ -89,6 +89,12 @@ All colors MUST be HSL.
   }
 }
 
+.fade-overflow {
+  contain: size;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, black calc(100% - 1.5rem), transparent);
+}
+
 .external-link-icon {
   display: inline-block;
   vertical-align: -0.08em;

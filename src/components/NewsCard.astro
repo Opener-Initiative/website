@@ -36,9 +36,11 @@ const titleId = `news-title-${entry.id.replaceAll("/", "-")}`;
     >
       {formatDate(pubDate)}
     </time>
-    <p class="text-sm text-muted-foreground line-clamp-3">{description}</p>
+    <p class="text-sm text-muted-foreground flex-1 min-h-[3lh] fade-overflow">
+      {description}
+    </p>
     <ArrowRight
-      className="w-4 h-4 mt-auto self-end text-muted-foreground group-hover:text-foreground transition-colors"
+      className="w-4 h-4 self-end text-muted-foreground group-hover:text-foreground transition-colors"
       aria-hidden="true"
     />
   </div>
