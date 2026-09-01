@@ -20,6 +20,7 @@ const news = defineCollection({
         imageAlt: z.string().optional(),
         imageCredit: z.string().optional(),
         draft: z.boolean().default(false),
+        pinned: z.boolean().default(false),
       })
       .refine((d) => !!d.image === !!d.imageAlt, {
         error: "image and imageAlt must be set together",

@@ -2,11 +2,16 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 /**
- * All published (non-draft) news entries, newest first. Every consumer of the
- * collection (entry pages, index, RSS, home page) must go through this so
- * drafts can never leak into one of them.
+ * All news entries that are not drafts, newest first.
+ * 
+ * "pinned-first" lists pinned entries first, all other entries follow.
+ * Within each group the entries are sorted from newest to oldest.
+ * 
+ * "date" ignores pins entirely and sorts strictly from newest to oldest.
  */
-export async function getPublishedNews(): Promise<CollectionEntry<"news">[]> {
+export async function getPublishedNews(
+  order: "pinned-first" | "date" = "pinned-first"
+): Promise<CollectionEntry<"news">[]> {
   const entries = await getCollection("news");
   // The <year>/<month> folders duplicate pubDate's year and month; fail the
   // build on drift so the URL can never contradict the displayed date.
@@ -18,9 +23,16 @@ export async function getPublishedNews(): Promise<CollectionEntry<"news">[]> {
       );
     }
   }
-  return entries
+
+  const published = entries
     .filter(({ data }) => !data.draft)
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  if (order === "date") {
+    return published;
+  }
+
+  return published.sort((a, b) => Number(b.data.pinned) - Number(a.data.pinned));
 }
 
 // Pin the formatting timezone so the rendered date is independent of the

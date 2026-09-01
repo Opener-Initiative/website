@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { formatDate } from "@/lib/news";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { title, description, pubDate, image } = entry.data;
+const { title, description, pubDate, image, pinned } = entry.data;
 const titleId = `news-title-${entry.id.replaceAll("/", "-")}`;
 ---
 
@@ -39,9 +39,19 @@ const titleId = `news-title-${entry.id.replaceAll("/", "-")}`;
     <p class="text-sm text-muted-foreground flex-1 min-h-[3lh] fade-overflow">
       {description}
     </p>
-    <ArrowRight
-      className="w-4 h-4 self-end text-muted-foreground group-hover:text-foreground transition-colors"
-      aria-hidden="true"
-    />
+    <div class="flex items-center">
+      {
+        pinned && (
+          <Star
+            className="w-4 h-4 fill-amber-400 text-amber-400"
+            aria-hidden="true"
+          />
+        )
+      }
+      <ArrowRight
+        className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors"
+        aria-hidden="true"
+      />
+    </div>
   </div>
 </a>
