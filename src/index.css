@@ -89,6 +89,12 @@ All colors MUST be HSL.
   }
 }
 
+.external-link-icon {
+  display: inline-block;
+  vertical-align: -0.08em;
+  margin-left: 0.2em;
+}
+
 @keyframes shimmer {
   0% {
     transform: translateX(-100%) skewX(-12deg);

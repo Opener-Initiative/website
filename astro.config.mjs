@@ -1,6 +1,8 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import { satteri } from "@astrojs/markdown-satteri";
+import { hastExternalLinks } from "./src/lib/hast-external-links";
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,6 +14,11 @@ export default defineConfig({
   trailingSlash: "always",
   build: {
     format: "directory",
+  },
+  markdown: {
+    processor: satteri({
+      hastPlugins: [hastExternalLinks],
+    }),
   },
   integrations: [react(), sitemap()],
   server: {
