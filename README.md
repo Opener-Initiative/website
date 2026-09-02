@@ -4,7 +4,7 @@ This repository contains the source code for the [Opener Initiative's website](h
 
 ## Getting Started
 
-The easiest way to get a working environment is the included dev container (VS Code -> "Reopen in Container"), which provides Bun and all dependencies.
+The easiest way to get a working environment is the included dev container (VS Code &rarr; "Reopen in Container"), which provides Bun and all dependencies.
 
 Otherwise, with [Bun](https://bun.com) installed:
 
@@ -69,6 +69,9 @@ description: "A one-sentence summary. Shown on post cards and in the RSS feed."
 pubDate: 2049-11-05
 image: "./hero.png"
 imageAlt: "Opener team members demoing the stack at DECT World 2049"
+imageCredit: "(c) Opener Initiative"
+draft: true
+pinned: true
 ---
 
 Post text. Start headings at `##`, and reference images like this:
@@ -78,9 +81,12 @@ Post text. Start headings at `##`, and reference images like this:
 
 Good to know:
 
-- `pubDate` is a plain date (`YYYY-MM-DD`). Posts are ordered by it, newest first, and it must agree with the post's year and month folders.
+- Only `title`, `description`, and `pubDate` are required. All other fields are optional.
+- `pubDate` is a plain date (`YYYY-MM-DD`) and orders the posts, newest first. It must match the post's year and month folders.
 - `image` is the post's cover picture and `imageAlt` its description for screen readers. Make it 1200 × 630 pixels, or post cards and link previews will crop it. Leave both out for a text-only post, but never one of them.
-- Add `draft: true` to the header block to hide a post from the published site.
-- A finished post appears on the home page, in the newsroom, and in the RSS feed automatically. Nothing else to edit.
+- `imageCredit` adds an attribution below the cover picture.
+- `draft: true` can be used for news items that are not yet to be published. If set, the post is kept out of the build and the corresponding HTML page is not generated.
+- `pinned: true` keeps a post at the front of the landing page and the newsroom, ahead of newer entries, and puts a golden star on its card. If multiple entries are pinned, they are ordered by `pubDate`. The RSS feed ignores pins and stays strictly newest to oldest.
+- A post appears on the landing page, in the newsroom, and in the RSS feed automatically.
 
-If something is wrong or missing, the build stops and says what and where.
+If something is wrong or missing, the build stops with a corresponding error message.
