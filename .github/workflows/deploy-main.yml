@@ -75,7 +75,8 @@ jobs:
             debug 3;
             open --env-password sftp://$DEPLOY_USER@$DEPLOY_HOST;
             cls -la;
-            glob --exist _astro;
+            cd _astro;
+            cd ..;
             mirror --reverse --dry-run --verbose --exclude-glob .well-known/ dist/ ./ ;
             bye
           "
