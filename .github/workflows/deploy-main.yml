@@ -33,7 +33,7 @@ jobs:
           include-hidden-files: true
 
   # Upload build artifact to webserver document root.
-  deploy:
+  deploy-artifact:
     needs: create-artifact
     runs-on: ubuntu-latest
     environment:
