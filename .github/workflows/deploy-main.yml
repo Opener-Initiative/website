@@ -54,7 +54,6 @@ jobs:
       # Connect to the webserver via SFTP and transfer the build artifact to the document root.
       # Validate the server identity by checking against the host key.
       # Ensure that SFTP connects to the docroot by checking for an existing Astro deployment.
-      # TODO: remove --dry-run once confirmed that everything works
       # TODO: add --delete to avoid stale files piling up
       - name: Mirror dist/ to the docroot
         env:
@@ -75,6 +74,6 @@ jobs:
             open --env-password sftp://$DEPLOY_USER@$DEPLOY_HOST;
             cd _astro;
             cd ..;
-            mirror --reverse --dry-run --verbose --exclude-glob .well-known/ dist/ ./ ;
+            mirror --reverse --verbose --exclude-glob .well-known/ dist/ ./ ;
             bye
           "
