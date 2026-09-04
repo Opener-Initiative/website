@@ -72,9 +72,7 @@ jobs:
             set net:timeout 20;
             set sftp:auto-confirm no;
             set sftp:connect-program 'ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password -o StrictHostKeyChecking=yes';
-            debug 3;
             open --env-password sftp://$DEPLOY_USER@$DEPLOY_HOST;
-            cls -la;
             cd _astro;
             cd ..;
             mirror --reverse --dry-run --verbose --exclude-glob .well-known/ dist/ ./ ;
