@@ -1,0 +1,25 @@
+name: Build site
+
+# Triggered on PRs and whenever they are updated (i.e., a new commit is added).
+on: pull_request
+
+# Building the site only requires read access to the repo.
+permissions:
+  contents: read
+
+# A new push cancels the run that is still going for the same branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # Install, check, lint and build. See .github/actions/bun.
+      - uses: ./.github/actions/bun

@@ -1,0 +1,79 @@
+name: Deploy site
+
+# Deploy site on every push to main. The workflow can also be run manually.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+# Do not cancel a running file transfer.
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  # Create the build artifact in a separate job so that third-party code (e.g.,
+  # the setup-bun action) does not have access to environment secrets.
+  create-artifact:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/bun
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+          if-no-files-found: error
+          include-hidden-files: true
+
+  # Upload build artifact to webserver document root.
+  deploy:
+    needs: create-artifact
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://opener-initiative.org/
+    permissions: {}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      # The runner image includes neither lftp nor sshpass.
+      - name: Install lftp and sshpass
+        run: sudo apt-get update -qq && sudo apt-get install -y lftp sshpass
+
+      # Connect to the webserver via SFTP and transfer the build artifact to the document root.
+      # Validate the server identity by checking against the host key.
+      # Ensure that SFTP connects to the docroot by checking for an existing Astro deployment.
+      # TODO: remove --dry-run once confirmed that everything works
+      # TODO: add --delete to avoid stale files piling up
+      - name: Mirror dist/ to the docroot
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          SSHPASS: ${{ secrets.DEPLOY_PASSWORD }}
+          DEPLOY_KNOWN_HOSTS: ${{ vars.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          lftp -e "
+            set cmd:fail-exit yes;
+            set net:max-retries 3;
+            set net:timeout 20;
+            set sftp:auto-confirm no;
+            set sftp:connect-program 'sshpass -e ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password -o StrictHostKeyChecking=yes';
+            open sftp://$DEPLOY_USER@$DEPLOY_HOST;
+            glob --exist _astro;
+            mirror --reverse --dry-run --verbose --exclude-glob .well-known/ dist/ ./ ;
+            bye
+          "
