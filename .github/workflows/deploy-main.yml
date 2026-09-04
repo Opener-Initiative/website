@@ -47,9 +47,9 @@ jobs:
           name: dist
           path: dist
 
-      # The runner image includes neither lftp nor sshpass.
-      - name: Install lftp and sshpass
-        run: sudo apt-get update -qq && sudo apt-get install -y lftp sshpass
+      # Install lftp which is not included in the runner image.
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y lftp
 
       # Connect to the webserver via SFTP and transfer the build artifact to the document root.
       # Validate the server identity by checking against the host key.
@@ -60,7 +60,7 @@ jobs:
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-          SSHPASS: ${{ secrets.DEPLOY_PASSWORD }}
+          LFTP_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
           DEPLOY_KNOWN_HOSTS: ${{ vars.DEPLOY_KNOWN_HOSTS }}
         run: |
           mkdir -p ~/.ssh && chmod 700 ~/.ssh
@@ -71,9 +71,9 @@ jobs:
             set net:max-retries 3;
             set net:timeout 20;
             set sftp:auto-confirm no;
-            set sftp:connect-program 'sshpass -e ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password -o StrictHostKeyChecking=yes';
+            set sftp:connect-program 'ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password -o StrictHostKeyChecking=yes';
             debug 3;
-            open sftp://$DEPLOY_USER@$DEPLOY_HOST;
+            open --env-password sftp://$DEPLOY_USER@$DEPLOY_HOST;
             cls -la;
             glob --exist _astro;
             mirror --reverse --dry-run --verbose --exclude-glob .well-known/ dist/ ./ ;
