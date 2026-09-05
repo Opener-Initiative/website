@@ -109,7 +109,7 @@ url: "https://example.com/"
 
 Good to know:
 
-- `name` is the full name, as the member writes it. It is announced by screen readers and used to sort logos alphabetically in the grid.
+- `name` is the full name, as the member writes it. It is announced by screen readers and used to sort logos alphabetically.
 - `logoLight` is the logo shown on light backgrounds, whereas `logoDark` is the one used in dark mode. If one logo works on both light and dark backgrounds, point both fields at the same file. Please provide SVG files with a transparent background and no excessive padding.
 - `url` points to the member's own website.
-- Logos are sized automatically and appear equally prominent in the grid.
+- Logos are sized automatically and appear equally prominent.

@@ -7,7 +7,7 @@ import { getCollection } from "astro:content";
  * side. Sizing from area rather than height keeps a square logo and a wide
  * word mark at comparable visual weight.
  */
-const BASE_AREA = 4900;
+const BASE_AREA = 6400;
 
 /**
  * 1 equalizes box area exactly; 0 gives every logo the same height. Below 1
@@ -20,79 +20,162 @@ const NORMALIZATION = 0.75;
 const members = (await getCollection("members")).sort((a, b) =>
   a.data.name.localeCompare(b.data.name, "de"),
 );
+
+const logos = members.map(({ data: { name, url, logoLight, logoDark } }) => {
+  const aspect = logoLight.width / logoLight.height;
+  const h = Math.sqrt(BASE_AREA) * aspect ** (-NORMALIZATION / 2);
+  return {
+    name,
+    url,
+    logoLight,
+    logoDark,
+    width: Math.round(h * aspect),
+    height: Math.round(h),
+    hasDark: logoDark.src !== logoLight.src,
+  };
+});
 ---
 
-<section id="members" class="py-16 md:py-24 bg-background">
-  <div class="container px-4">
-    <div class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-card-foreground mb-4">
-        Who We Are
-      </h2>
-      <p class="text-muted-foreground text-lg">
-        Opener is a joint effort of academia, industry, and the open-source
-        community.
-      </p>
+<section id="members">
+  {/* Gradient strip, cut at the top by the same wave that closes the hero. */}
+  <div class="strip relative overflow-hidden bg-[image:var(--gradient-hero)] text-center">
+    <div class="wave absolute top-[-1px] left-0 right-0" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full -scale-y-100">
+        <path
+          d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+          class="fill-background"
+        />
+      </svg>
     </div>
+    <div class="container relative px-4">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+          Who We Are
+        </h2>
+        <p class="text-lg text-primary-foreground/90">
+          Opener is a joint effort of academia, industry, and the open-source
+          community.
+        </p>
+      </div>
+    </div>
+  </div>
 
-    <ul class="logo-wall" role="list">
+  {/*
+    Logo band. A wrapped wall while every logo fits. Once they overflow, the
+    script below clones the list and turns the band into a scrolling loop.
+  */}
+  <div class="marquee bg-background">
+    <ul role="list">
       {
-        members.map(({ data: { name, url, logoLight, logoDark } }) => {
-          const aspect = logoLight.width / logoLight.height;
-          const h = Math.sqrt(BASE_AREA) * aspect ** (-NORMALIZATION / 2);
-          const width = Math.round(h * aspect);
-          const height = Math.round(h);
-          const hasDark = logoDark.src !== logoLight.src;
-          return (
-            <li>
-              <a
-                class:list={["logo", { "has-dark": hasDark }]}
-                style={`--w:${width}px;--h:${height}px`}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+        logos.map(({ name, url, logoLight, logoDark, width, height, hasDark }) => (
+          <li>
+            <a
+              class:list={["logo", { "has-dark": hasDark }]}
+              style={`--w:${width}px;--h:${height}px`}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                class="logo-light"
+                src={logoLight}
+                alt=""
+                width={width}
+                height={height}
+                loading="lazy"
+                decoding="async"
+              />
+              {hasDark && (
                 <Image
-                  class="logo-light"
-                  src={logoLight}
+                  class="logo-dark"
+                  src={logoDark}
                   alt=""
                   width={width}
                   height={height}
                   loading="lazy"
                   decoding="async"
                 />
-                {hasDark && (
-                  <Image
-                    class="logo-dark"
-                    src={logoDark}
-                    alt=""
-                    width={width}
-                    height={height}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                )}
-                <span class="sr-only">{name}</span>
-              </a>
-            </li>
-          );
-        })
+              )}
+              <span class="sr-only">{name}</span>
+            </a>
+          </li>
+        ))
       }
     </ul>
   </div>
 </section>
 
 <style>
-  .logo-wall {
+  .strip {
+    --strip-pad: clamp(3.5rem, 2rem + 3.6vw, 8rem);
+    /* The wave SVG is 1440x120 and spans the full width. */
+    --wave-h: calc(100vw * 120 / 1440);
+    padding-top: calc(var(--wave-h) * 0.55 + var(--strip-pad));
+    padding-bottom: calc(var(--strip-pad) * 1.05);
+  }
+  .wave {
+    line-height: 0;
+  }
+
+  .marquee {
     --logo-scale: 1;
+    --gap: 4.5rem;
+    --fade: 8rem;
+    overflow: clip;
+    padding: clamp(3rem, 2rem + 1.6vw, 4.5rem) 0;
+  }
+  .marquee ul {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 4.5rem 4.5rem;
-    max-width: 64rem;
+    gap: var(--gap);
     margin: 0 auto;
-    padding: 0;
+    padding: 0.5rem calc(var(--gap) / 2);
     list-style: none;
+  }
+  .marquee:not(.is-scrolling) ul + ul {
+    display: none;
+  }
+
+  /* Loop: two copies side by side, each sliding left by its own width. */
+  .marquee.is-scrolling {
+    display: flex;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 var(--fade),
+      #000 calc(100% - var(--fade)),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 var(--fade),
+      #000 calc(100% - var(--fade)),
+      transparent
+    );
+  }
+  .marquee.is-scrolling ul {
+    flex: none;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    min-width: 100%;
+    margin: 0;
+    animation: marquee var(--duration) linear infinite;
+  }
+  .marquee.is-scrolling.is-focused ul {
+    animation-play-state: paused;
+  }
+  @media (hover: hover) {
+    .marquee.is-scrolling:hover ul {
+      animation-play-state: paused;
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-100%);
+    }
   }
 
   .logo {
@@ -100,14 +183,13 @@ const members = (await getCollection("members")).sort((a, b) =>
     width: calc(var(--w) * var(--logo-scale));
     height: calc(var(--h) * var(--logo-scale));
     transition: transform 0.18s ease;
+    outline-offset: 6px;
   }
-
   .logo :global(img) {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
-
   .logo:hover,
   .logo:focus-visible {
     transform: scale(1.07);
@@ -124,9 +206,10 @@ const members = (await getCollection("members")).sort((a, b) =>
   }
 
   @media (max-width: 767px) {
-    .logo-wall {
+    .marquee {
       --logo-scale: 0.85;
-      gap: 2.5rem 2.5rem;
+      --gap: 2.5rem;
+      --fade: 3rem;
     }
   }
 
@@ -140,3 +223,68 @@ const members = (await getCollection("members")).sort((a, b) =>
     }
   }
 </style>
+
+<script>
+  const SPEED = 40; // px/s
+
+  const marquee = document.querySelector<HTMLElement>("#members .marquee");
+  const list = marquee?.querySelector("ul");
+  if (marquee && list) {
+    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const clone = list.cloneNode(true) as HTMLUListElement;
+    list.after(clone);
+    const items = [...marquee.querySelectorAll("li")];
+
+    // Measure in loop layout, then keep it only if the logos overflow.
+    const update = () => {
+      marquee.classList.add("is-scrolling");
+      const width = list.offsetWidth;
+      marquee.style.setProperty("--duration", `${width / SPEED}s`);
+      marquee.classList.toggle(
+        "is-scrolling",
+        width > marquee.clientWidth && !reduceMotion.matches,
+      );
+    };
+    new ResizeObserver(update).observe(marquee);
+    reduceMotion.addEventListener("change", update);
+
+    // Only active items are reachable by Tab and screen readers. While the
+    // loop runs, those are the list's own. While keyboard focus pauses it,
+    // they are the logos in view, from either copy.
+    const activate = (active: (item: HTMLLIElement) => boolean) => {
+      for (const item of items) {
+        const link = item.querySelector("a")!;
+        if (active(item)) {
+          link.removeAttribute("tabindex");
+          item.removeAttribute("aria-hidden");
+        } else {
+          link.tabIndex = -1;
+          item.setAttribute("aria-hidden", "true");
+        }
+      }
+    };
+    const own = (item: HTMLLIElement) => !clone.contains(item);
+    activate(own);
+
+    marquee.addEventListener("focusin", (e) => {
+      const target = e.target as HTMLElement;
+      if (marquee.classList.contains("is-focused") || !target.matches(":focus-visible")) return;
+      marquee.classList.add("is-focused");
+      const band = marquee.getBoundingClientRect();
+      const inView = items.filter((item) => {
+        const r = item.getBoundingClientRect();
+        return r.right > band.left && r.left < band.right;
+      });
+      activate((item) => inView.includes(item));
+      const from = e.relatedTarget;
+      const backward =
+        from instanceof Node && !!(marquee.compareDocumentPosition(from) & Node.DOCUMENT_POSITION_FOLLOWING);
+      inView[backward ? inView.length - 1 : 0]?.querySelector("a")?.focus();
+    });
+    marquee.addEventListener("focusout", (e) => {
+      if (marquee.contains(e.relatedTarget as Node | null)) return;
+      marquee.classList.remove("is-focused");
+      activate(own);
+    });
+  }
+</script>

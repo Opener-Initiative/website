@@ -7,7 +7,6 @@ const navLinks = [
   { label: "Technology", href: "/#technology" },
   { label: "Principles", href: "/#principles" },
   { label: "Contribute", href: "/#contribute" },
-  { label: "Members", href: "/#members" },
   { label: "News", href: "/#news" },
 ];
 
