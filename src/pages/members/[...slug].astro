@@ -1,0 +1,200 @@
+---
+import { getCollection, render } from "astro:content";
+import { getImage, Image } from "astro:assets";
+import type { InferGetStaticPropsType, GetStaticPaths } from "astro";
+import { Globe, MapPin } from "lucide-react";
+import Base from "@/layouts/Base.astro";
+
+export const getStaticPaths = (async () => {
+  return (await getCollection("members")).map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry } = Astro.props;
+const { name, url, location, logoLight, logoDark, cover, coverAlt } =
+  entry.data;
+const { Content } = await render(entry);
+
+const hasDark = logoDark.src !== logoLight.src;
+
+// The cover keeps its own aspect ratio, so nothing is cropped, unless it is
+// taller than this, in which case it is cropped to this ratio (top and
+// bottom) so a square or portrait picture doesn't fill the whole screen.
+const MIN_COVER_ASPECT = 2;
+const coverAspect =
+  cover && Math.max(cover.width / cover.height, MIN_COVER_ASPECT);
+
+// Omit the text block when the body is left empty.
+const hasBody = !!entry.body?.trim();
+
+const ogImage = cover
+  ? (await getImage({ src: cover, width: 1200, format: "webp" })).src
+  : undefined;
+---
+
+<Base
+  title={name}
+  description={`${name} is a member of the Opener Initiative.`}
+  ogImage={ogImage}
+  ogImageAlt={coverAlt}
+  class="min-h-screen flex flex-col"
+>
+  <main class="flex-1 container px-4 py-32">
+    <article class="max-w-5xl mx-auto">
+      {/* Cover, only when the member provides one. */}
+      {
+        cover && (
+          <div
+            class="relative overflow-hidden rounded-xl -mb-8 md:mb-10"
+            style={`aspect-ratio: ${coverAspect}`}
+          >
+            <Image
+              src={cover}
+              alt={coverAlt ?? ""}
+              widths={[640, 1024, 1500]}
+              sizes="(min-width: 1024px) 1024px, 100vw"
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+            />
+          </div>
+        )
+      }
+
+      {
+        /*
+        Two columns from md up: logo and metadata on the left, name and text
+        on the right. The left column stays in view while the text scrolls.
+        On small screens everything stacks in DOM order: logo, metadata,
+        name, text. With a cover image, the logo sits on a card that overlaps
+        the cover image's bottom edge.
+        */
+      }
+      <div class="grid gap-x-10 gap-y-8 md:grid-cols-[16rem_1fr]">
+        <aside
+          class="side md:col-start-1 md:row-start-1 md:row-span-2 md:self-start"
+        >
+          <div
+            class:list={["logo", { "has-dark": hasDark, "on-cover": cover }]}
+          >
+            <Image
+              class="logo-light"
+              src={logoLight}
+              alt=""
+              width={logoLight.width}
+              loading="eager"
+            />
+            {
+              hasDark && (
+                <Image
+                  class="logo-dark"
+                  src={logoDark}
+                  alt=""
+                  width={logoDark.width}
+                  loading="eager"
+                />
+              )
+            }
+          </div>
+          <dl class="meta flex flex-col gap-3 text-sm">
+            <div>
+              <dt class="sr-only">Website</dt>
+              <dd>
+                <Globe className="w-4 h-4" aria-hidden="true" />
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:underline"
+                >
+                  {new URL(url).hostname.replace(/^www\./, "")}
+                </a>
+              </dd>
+            </div>
+            {
+              location && (
+                <div>
+                  <dt class="sr-only">Location</dt>
+                  <dd>
+                    <MapPin className="w-4 h-4" aria-hidden="true" />
+                    <span>{location}</span>
+                  </dd>
+                </div>
+              )
+            }
+          </dl>
+        </aside>
+
+        <header class="md:col-start-2 md:row-start-1">
+          <h1 class="text-4xl font-bold tracking-tight">{name}</h1>
+        </header>
+
+        {
+          hasBody && (
+            <div class="prose md:col-start-2 md:row-start-2">
+              <Content />
+            </div>
+          )
+        }
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  /* Fixed header is 4rem tall; keep a little air below it. */
+  @media (min-width: 768px) {
+    .side {
+      position: sticky;
+      top: 5.5rem;
+    }
+  }
+
+  /* Center the logo horizontally and cap its height and width. */
+  .logo {
+    width: fit-content;
+    margin: 0 auto 1.75rem;
+  }
+  @media (max-width: 767px) {
+    .logo.on-cover {
+      position: relative;
+      padding: 0.5rem;
+      border-radius: 0.75rem;
+      background: hsl(var(--background));
+    }
+    .meta dd {
+      justify-content: center;
+    }
+  }
+  .logo :global(img) {
+    width: auto;
+    height: auto;
+    max-width: 14rem;
+    max-height: 6rem;
+  }
+  .logo-dark {
+    display: none;
+  }
+  :global(.dark) .has-dark .logo-light {
+    display: none;
+  }
+  :global(.dark) .logo-dark {
+    display: block;
+  }
+
+  .meta dd {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    color: hsl(var(--foreground));
+  }
+  /* Icon is 1rem on a 1.25rem line; nudge it onto the first line's centre. */
+  .meta dd :global(svg) {
+    flex: none;
+    margin-top: 0.125rem;
+    color: hsl(var(--muted-foreground));
+  }
+</style>

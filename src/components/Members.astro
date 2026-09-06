@@ -21,12 +21,12 @@ const members = (await getCollection("members")).sort((a, b) =>
   a.data.name.localeCompare(b.data.name, "de"),
 );
 
-const logos = members.map(({ data: { name, url, logoLight, logoDark } }) => {
+const logos = members.map(({ id, data: { name, logoLight, logoDark } }) => {
   const aspect = logoLight.width / logoLight.height;
   const h = Math.sqrt(BASE_AREA) * aspect ** (-NORMALIZATION / 2);
   return {
     name,
-    url,
+    href: `/members/${id}/`,
     logoLight,
     logoDark,
     width: Math.round(h * aspect),
@@ -67,14 +67,12 @@ const logos = members.map(({ data: { name, url, logoLight, logoDark } }) => {
   <div class="marquee bg-background">
     <ul role="list">
       {
-        logos.map(({ name, url, logoLight, logoDark, width, height, hasDark }) => (
+        logos.map(({ name, href, logoLight, logoDark, width, height, hasDark }) => (
           <li>
             <a
               class:list={["logo", { "has-dark": hasDark }]}
               style={`--w:${width}px;--h:${height}px`}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={href}
             >
               <Image
                 class="logo-light"

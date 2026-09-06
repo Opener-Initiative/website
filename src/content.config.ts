@@ -29,15 +29,24 @@ const news = defineCollection({
 const members = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/members" }),
   schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      logoLight: image(),
-      // Required. A member without a dedicated dark logo must point this at
-      // the light variant explicitly, so "no dark variant" is a recorded
-      // decision rather than an omission nobody noticed.
-      logoDark: image(),
-      url: z.url(),
-    }),
+    z
+      .object({
+        name: z.string(),
+        logoLight: image(),
+        // Required. A member without a dedicated dark logo must point this at
+        // the light variant explicitly, so "no dark variant" is a recorded
+        // decision rather than an omission nobody noticed.
+        logoDark: image(),
+        url: z.url(),
+        location: z.string().optional(),
+        // Banner across the top of the profile page.
+        cover: image().optional(),
+        coverAlt: z.string().optional(),
+      })
+      .refine((d) => !!d.cover === !!d.coverAlt, {
+        error: "cover and coverAlt must be set together",
+        path: ["coverAlt"],
+      }),
 });
 
 export const collections = { news, members };
