@@ -38,6 +38,7 @@ const members = defineCollection({
         // decision rather than an omission nobody noticed.
         logoDark: image(),
         url: z.url(),
+        email: z.email().optional(),
         location: z.string().optional(),
         // Banner across the top of the profile page.
         cover: image().optional(),
