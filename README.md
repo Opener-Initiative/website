@@ -39,11 +39,11 @@ This project is built with:
 └── src/
     ├── assets/            logos and images
     ├── components/        Astro and React components
-    ├── content/           news posts
+    ├── content/           news posts and member profiles
     ├── layouts/           page shell
     ├── lib/               shared helpers
     ├── pages/             routes
-    ├── content.config.ts  news collection schema
+    ├── content.config.ts  content collection schemas
     └── index.css          global styles and light/dark themes
 ```
 
@@ -90,3 +90,47 @@ Good to know:
 - A post appears on the landing page, in the newsroom, and in the RSS feed automatically.
 
 If something is wrong or missing, the build stops with a corresponding error message.
+
+## Creating Member Profiles
+
+Add your profile by creating a new folder under `src/content/members/`, for example:
+
+```
+src/content/members/wey-yu/
+├── index.md         the profile
+├── logo.svg         the logo
+├── logo-dark.svg    the logo for dark mode
+├── cover.png        the cover picture (optional)
+└── team.png         any other images used in the profile text
+```
+
+The folder name becomes the address of the profile page, here `/members/wey-yu/`. Clicking the logo on the landing page opens the member's profile.
+
+`index.md` starts with a header block between `---` lines, followed by the profile text in [Markdown](https://www.markdownguide.org/cheat-sheet/):
+
+```markdown
+---
+name: "Weyland-Yutani Corporation"
+logoLight: "./logo.svg"
+logoDark: "./logo-dark.svg"
+url: "https://en.wikipedia.org/wiki/Alien_(film)"
+email: "contact@example.com"
+location: "Earth"
+cover: "./cover.png"
+coverAlt: "The commercial towing vehicle USCSS Nostromo in orbit above LV-426"
+---
+
+Profile text. Start headings at `##`, and reference images like this:
+
+![The crew of the USCSS Nostromo](./team.png)
+```
+
+Good to know:
+
+- `name` is the full name, as the member writes it. It is the page title, is announced by screen readers, and is used to sort logos alphabetically.
+- `logoLight` is the logo shown on light backgrounds, whereas `logoDark` is the one used in dark mode. If one logo works on both light and dark backgrounds, point both fields at the same file. Please provide SVG files with a transparent background and no excessive padding. Logos are sized automatically and appear equally prominent.
+- `url` points to the member's own website. It is shown on the profile page.
+- `email` is an optional contact address. It is shown on the profile page as a link that opens the visitor's mail program.
+- `location` is optional free text, e.g. a city and country.
+- `cover` is the optional picture that is shown across the top of the profile page and `coverAlt` is its description for screen readers. Leave both out for a page without a cover, but never one of them. The picture is shown in its own aspect ratio and is not cropped, unless it is taller than 2:1. Make it at least 1500 pixels wide. Banners from other social pages, such as LinkedIn, can be reused as they are.
+- Writing a profile text is optional, but strongly encouraged. Without it, the page consists of the cover, logo, name, and details alone.
