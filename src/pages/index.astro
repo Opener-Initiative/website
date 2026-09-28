@@ -1,26 +1,26 @@
 ---
 import Base from "@/layouts/Base.astro";
 import Hero from "@/components/Hero";
-import Technology from "@/components/Technology";
-import ProtocolStack from "@/components/ProtocolStack";
-import DecentralizedByDesign from "@/components/DecentralizedByDesign";
-import GuidingPrinciples from "@/components/GuidingPrinciples";
-import Contribute from "@/components/Contribute";
-import GetStarted from "@/components/GetStarted";
-import Members from "@/components/Members.astro";
 import LatestNews from "@/components/LatestNews.astro";
+import Technology from "@/components/Technology";
+import DecentralizedByDesign from "@/components/DecentralizedByDesign";
+import ProtocolStack from "@/components/ProtocolStack";
+import GuidingPrinciples from "@/components/GuidingPrinciples";
+import GetStarted from "@/components/GetStarted";
+import Contribute from "@/components/Contribute";
+import Members from "@/components/Members.astro";
 ---
 
 <Base>
   <main>
     <Hero />
+    <LatestNews />
     <Technology />
     <DecentralizedByDesign />
     <ProtocolStack client:visible />
     <GuidingPrinciples />
-    <Contribute client:visible />
     <GetStarted />
-    <LatestNews />
+    <Contribute client:visible />
     <Members />
   </main>
 </Base>

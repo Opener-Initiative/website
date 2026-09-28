@@ -4,10 +4,10 @@ import { useState } from "react";
 import openerLogo from "@/assets/logo_primary_color.svg?url";
 
 const navLinks = [
+  { label: "News", href: "/#news" },
   { label: "Technology", href: "/#technology" },
   { label: "Principles", href: "/#principles" },
   { label: "Contribute", href: "/#contribute" },
-  { label: "News", href: "/#news" },
 ];
 
 const Header = () => {
