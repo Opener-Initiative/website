@@ -43,16 +43,16 @@ const Hero = () => {
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 pt-12 max-w-4xl mx-auto">
             <div className="text-center">
+              <div className="text-3xl font-bold text-primary-foreground">Open Standard</div>
+              <div className="text-sm text-primary-foreground/70 mt-1">for mMTC and URLLC</div>
+            </div>
+            <div className="text-center">
               <div className="text-3xl font-bold text-primary-foreground">Open Source</div>
               <div className="text-sm text-primary-foreground/70 mt-1">licensed under Apache 2.0</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary-foreground">5G Technology</div>
-              <div className="text-sm text-primary-foreground/70 mt-1">for mMTC and URLLC</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary-foreground">License-exempt</div>
-              <div className="text-sm text-primary-foreground/70 mt-1">spectrum in the 1.9 GHz band</div>
+              <div className="text-3xl font-bold text-primary-foreground">Open Spectrum</div>
+              <div className="text-sm text-primary-foreground/70 mt-1">in the 1.9 GHz band</div>
             </div>
           </div>
         </div>
