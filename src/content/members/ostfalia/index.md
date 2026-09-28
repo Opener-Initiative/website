@@ -3,6 +3,7 @@ name: "Ostfalia University of Applied Sciences"
 logoLight: "./ostfalia_logo.svg"
 logoDark: "./ostfalia_logo.svg"
 url: "https://www.ostfalia.de/en/"
+email: "m.perez@ostfalia.de"
 location: Wolfenbüttel, Germany
 cover: "./ostfalia_cover.jpg"
 coverAlt: "Collage of four Ostfalia University campus views."
