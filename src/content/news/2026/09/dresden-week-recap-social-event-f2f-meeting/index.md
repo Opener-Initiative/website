@@ -12,7 +12,7 @@ Dresden hosted three interwoven strands of OPENER Initiative and OpenDECT-X work
 
 Tuesday's technical sessions closed with a different kind of gathering: an OPENER Initiative social event in Dresden's historic old town, kindly sponsored by Sennheiser, followed by a walk through the city together. It set an informal, personal tone for the technical days that followed.
 
-![Group picture of the attendees of the OPENER social event](./jjp-20260915-ETSI-and-F2F-Meeting-Dresden-0008-low-res-web.jpg)
+![Group picture of the attendees of the OPENER social event](./jjp-20260915-ETSI-and-F2F-Meeting-Dresden-0008-low-res-web.jpg "Attendees from Sennheiser, Deveritec, LMS, Nordic, TU Dresden, Ostfalia, and the Ariel OS community at the OPENER Initiative social event.")
 
 ## Three days at the Feldschlösschen Stammhaus
 
