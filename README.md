@@ -77,6 +77,12 @@ pinned: true
 Post text. Start headings at `##`, and reference images like this:
 
 ![The Opener booth at DECT World 2049](./booth.png "Optional image caption goes here")
+
+Insert quotes with an optional attribution as follows:
+
+> I'm sorry, Dave. I'm afraid I can't do that.
+>
+> --- HAL 9000, Discovery One (2001: A Space Odyssey)
 ```
 
 Good to know:
