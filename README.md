@@ -76,7 +76,7 @@ pinned: true
 
 Post text. Start headings at `##`, and reference images like this:
 
-![The Opener booth at DECT World 2049](./booth.png)
+![The Opener booth at DECT World 2049](./booth.png "Optional image caption goes here")
 ```
 
 Good to know:
