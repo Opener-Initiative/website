@@ -235,13 +235,9 @@ const ProtocolStack = () => {
                 </div>
               </div>
 
-              {/* Base indicator */}
-              <div className="mt-6 text-center">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border text-sm text-muted-foreground">
-                  <div className="w-2 h-2 rounded-full bg-secondary motion-safe:animate-pulse" />
-                  Radio Interface (ETSI TS 103 636-2)
-                </div>
-              </div>
+              <p className="mt-6 text-center text-sm text-muted-foreground">
+                Not shown are 636-2, which establishes the minimum RF requirements, and 636-1, which gives an overview of the series.
+              </p>
             </div>
 
             {/* Details Panel */}
