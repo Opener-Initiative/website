@@ -15,14 +15,16 @@ const DecentralizedByDesign = () => {
                 deployments, users benefit from low costs and reduced operational complexity, as networks can be
                 deployed and maintained independently of a mobile network operator.
               </p>
-              <div className="border-l-2 border-secondary/50 pl-5">
-                <p className="text-base text-muted-foreground italic">
-                  "DECT-2020 NR as a technology foundation is targeted for local area wireless applications, which can
-                  be deployed anywhere by anyone at any time. The technology supports autonomous and automatic operation
-                  with minimal maintenance effort."
-                </p>
-                <p className="text-base font-medium text-foreground mt-3">— ETSI TS 103 636-1</p>
-              </div>
+              <figure>
+                <blockquote className="border-l-2 border-secondary/50 pl-5">
+                  <p className="text-base text-muted-foreground italic">
+                    "DECT-2020 NR as a technology foundation is targeted for local area wireless applications, which can
+                    be deployed anywhere by anyone at any time. The technology supports autonomous and automatic operation
+                    with minimal maintenance effort."
+                  </p>
+                </blockquote>
+                <figcaption className="text-base font-medium text-foreground mt-3 pl-[22px]">— ETSI TS 103 636-1</figcaption>
+              </figure>
             </div>
 
             <div className="grid gap-6">
