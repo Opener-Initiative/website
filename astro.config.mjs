@@ -4,6 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import { satteri } from "@astrojs/markdown-satteri";
 import { hastExternalLinks } from "./src/lib/hast-external-links";
 import { hastFigureCaptions } from "./src/lib/hast-figure-captions";
+import { hastQuoteAttributions } from "./src/lib/hast-quote-attributions";
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,7 +19,7 @@ export default defineConfig({
   },
   markdown: {
     processor: satteri({
-      hastPlugins: [hastExternalLinks, hastFigureCaptions],
+      hastPlugins: [hastExternalLinks, hastFigureCaptions, hastQuoteAttributions],
     }),
   },
   integrations: [react(), sitemap()],
