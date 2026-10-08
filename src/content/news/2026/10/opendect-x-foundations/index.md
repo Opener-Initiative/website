@@ -2,6 +2,8 @@
 title: 'OpenDECT-X, Explained: The Team, the Technology, and the Funding Behind It'
 description: 'OpenDECT-X is easy to misread at a glance: a project with "DECT" in the name, three partners of very different kinds, and public funding attached to it. Put together, these three facts explain what the project is and why it exists.'
 pubDate: 2026-10-06
+image: "./1-4_Das_Konsortium.png"
+imageAlt: "Four hands with different skin tones reach in from the corners of the image, each holding one piece of a four-piece puzzle showing icons of a graduation cap, a radio tower, a microchip, and a group of people."
 ---
 
 OpenDECT-X is easy to misread at a glance: a project with "DECT" in the name, three partners of very different kinds, and public funding attached to it. Put together, these three facts explain what the project is and why it exists.
