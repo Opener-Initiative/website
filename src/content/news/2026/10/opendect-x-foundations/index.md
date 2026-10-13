@@ -20,6 +20,8 @@ This combination is no coincidence: an open ecosystem needs research, applicatio
 
 ## What it actually is
 
+![In the left half of the illustration, a dark, winding road ends at a cliff edge with a barricade and an old DECT cordless phone. On the right, a bright highway leads toward a rising sun stylized as a large wireless signal icon. A purple sign pointing right reads 'DECT NR+'.](./1-5_Ein_radikaler_Neuanfang_kein_Update.png)
+
 DECT is widely associated with the cordless phone. Its standardization began at CEPT and ETSI in 1988; the first ETSI standard, EN 300 175, was published in 1992. DECT NR+ carries a related name. It shares little else.
 
 > DECT NR+ is a clean-sheet radio redesign that uses modern digital transmission techniques while coexisting with legacy DECT in the same frequency band.
