@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import mdx from "@astrojs/mdx";
 import { satteri } from "@astrojs/markdown-satteri";
 import { hastExternalLinks } from "./src/lib/hast-external-links";
 import { hastFigureCaptions } from "./src/lib/hast-figure-captions";
@@ -22,7 +23,7 @@ export default defineConfig({
       hastPlugins: [hastExternalLinks, hastFigureCaptions, hastQuoteAttributions],
     }),
   },
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap(), mdx()],
   server: {
     host: true,
     port: 8080,
