@@ -1,0 +1,76 @@
+---
+import { Image } from "astro:assets";
+import { UserRound } from "lucide-react";
+
+interface Props {
+  list: {
+    name: string;
+    role?: string;
+    affiliation?: string;
+    photo?: ImageMetadata;
+  }[];
+}
+
+const { list } = Astro.props;
+---
+
+<ul>
+  {
+    list.map(({ name, role, affiliation, photo }) => (
+      <li>
+        {photo ? (
+          <Image src={photo} alt="" width={192} class="photo" />
+        ) : (
+          <span class="photo">
+            <UserRound aria-hidden="true" />
+          </span>
+        )}
+        {name}
+        {role && <span class="detail role">{role}</span>}
+        {affiliation && <span class="detail">{affiliation}</span>}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5em;
+    margin: 2em 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    width: 10em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-weight: 600;
+  }
+  .photo {
+    display: grid;
+    place-items: center;
+    width: 6em;
+    height: 6em;
+    margin: 0 auto 0.5em;
+    border-radius: 50%;
+    object-fit: cover;
+    background: hsl(var(--muted));
+    color: hsl(var(--background));
+  }
+  .photo :global(svg) {
+    width: 60%;
+    height: 60%;
+  }
+  .detail {
+    display: block;
+    font-size: 0.875em;
+    font-weight: normal;
+  }
+  .role {
+    color: hsl(var(--muted-foreground));
+  }
+</style>
