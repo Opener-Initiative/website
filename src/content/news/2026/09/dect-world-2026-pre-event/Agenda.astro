@@ -1,0 +1,53 @@
+---
+interface Props {
+  items: { time: string; title: string; details?: string[] }[];
+}
+
+const { items } = Astro.props;
+---
+
+<dl>
+  {
+    items.map(({ time, title, details }) => (
+      <>
+        <dt class="font-mono">{time}</dt>
+        <dd>
+          {title}
+          {details?.map((detail) => (
+            <span>{detail}</span>
+          ))}
+        </dd>
+      </>
+    ))
+  }
+</dl>
+
+<style>
+  dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+  }
+  dt,
+  dd {
+    margin: 0;
+    padding: 0;
+  }
+  dd + dt,
+  dd + dt + dd {
+    margin-top: 0.75em;
+    padding-top: 0.75em;
+    border-top: 1px solid hsl(var(--border));
+  }
+  dt {
+    padding-right: 1.5em;
+    font-weight: normal;
+  }
+  dd {
+    font-weight: 600;
+  }
+  span {
+    display: block;
+    font-weight: normal;
+    color: hsl(var(--muted-foreground));
+  }
+</style>
