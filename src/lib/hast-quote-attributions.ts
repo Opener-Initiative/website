@@ -26,7 +26,20 @@ export const hastQuoteAttributions = defineHastPlugin({
         properties: {},
         children: [
           { ...node, children: node.children.filter((child) => child !== last) },
-          { ...last, tagName: "figcaption", properties: { className: ["pl-5"] } },
+          {
+            ...last,
+            tagName: "figcaption",
+            properties: { className: ["flex", "gap-2", "pl-5"] },
+            children: [
+              { type: "text", value: "\u2014" },
+              {
+                type: "element",
+                tagName: "span",
+                properties: {},
+                children: [{ ...first, value: first.value.slice(1).trimStart() }, ...last.children.slice(1)],
+              },
+            ],
+          },
         ],
       });
     },
