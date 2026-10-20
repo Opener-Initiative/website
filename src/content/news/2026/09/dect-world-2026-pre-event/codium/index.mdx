@@ -1,12 +1,27 @@
 import OpenerBadge from "../components/OpenerBadge.astro";
 import Portraits from "../components/Portraits.astro";
 
+import axel from "./Axel.jpg"
+import mathieu from "./Mathieu.jpg"
+
 ### Codium Electronique <OpenerBadge />
 
-Some descriptive text goes here.
+Codium Electronique will demonstrate how to use the Opener Initiative stack on its line of 
+hardware products for DECT NR+ development, featuring their NR+ gateway providing DECT NR+, 
+Ethernet, WiFi and LTE connectivity, and a NR+ sensor node.
+
+Demonstrations will include how to use the development environment and integrate the
+Opener stack on hardware, via two samples app: the Opener ping-pong sample, and a
+practical example of sending temperature measurements between a sensor node and a gateway.
+
+> We are convinced DECT NR+ is the future of smart cities and high density IoT networks, our
+> goal is to accelerate its adoption through an easy to use, open source reference stack under
+> the Opener Initiative umbrella
+>
+> --- Axel Moinet - Codium Electronique
 
 {/* Please change depending on who of you will be there */}
 <Portraits list={[
-  { name: "Axel Moinet", role: "<role goes here>", affiliation: "Codium Electronique" },
-  { name: "Mathieu Poinsot", role: "<role goes here>", affiliation: "Codium Electronique" }
+  { name: "Axel Moinet", role: "PhD, Engineer embedded and IoT", affiliation: "Codium Electronique", photo: axel },
+  { name: "Mathieu Poinsot", role: "Business engineer and project management", affiliation: "Codium Electronique", photo: mathieu }
 ]} />
