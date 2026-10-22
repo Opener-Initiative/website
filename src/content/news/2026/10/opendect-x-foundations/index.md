@@ -34,6 +34,8 @@ Understanding this distinction matters. Those who dismiss DECT NR+ as "the cordl
 
 ## Why it is publicly funded
 
+![A hand reaches in from the top left, pouring gold coins from a watering can marked with a purple German federal eagle onto a young green plant that grows from a small mound of soil in a bare, rocky landscape.](./1-6_Warum_oeffentliche_Foerderung_hier_den_Unterschied_macht.png)
+
 Why does an open standard need public funding when the companies involved are financially strong? Because open-source infrastructure for industrial wireless does not emerge from a market incentive. No single company has a sufficient interest in building a reference implementation that is freely available to all, including its own competitors.
 
 Mareike Zocher, Funding Manager at Sennheiser, explains:
