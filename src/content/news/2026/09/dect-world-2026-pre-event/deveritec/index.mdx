@@ -1,18 +1,21 @@
 import OpenerBadge from "../components/OpenerBadge.astro";
 import Portraits from "../components/Portraits.astro";
 
-### Deveritec <OpenerBadge />
+import mirko from "./Mirko_Riedel.jpg";
+import rainer from "./Rainer_Schubert.png";
+import norbert from "./Norbert_Hesse.jpg";
 
-Deveritec will demonstrate the current state of the OPENER stack on our new Raspberry Pi HAT, the dectnrPi. Visitors can bring their code and debug it together with our engineers directly on the hardware. The demos include:
+### Deveritec<OpenerBadge />
+
+[Deveritec](https://deveritec.com/) will demonstrate the current state of the OPENER stack on our new Raspberry Pi HAT, the dectnrPi. Visitors can bring their code and debug it together with our engineers directly on the hardware. The demos include:
 
 * OPENER ping-pong sample: the stack running end to end on our hardware.
 * DECT NR+ Wireshark sniffer: a sniffer based on the OPENER project for capturing and analysing NR+ traffic.
 
 Beyond the current stack, we will show a pager demo that offers an outlook on what the OPENER stack and the dectnrPi could enable in the future.
 
-{/* Bitte anpassen, je nachdem, wer von euch da ist */}
 <Portraits list={[
-  { name: "Mirko Riedel", role: "Director research & innovation", affiliation: "deveritec GmbH" },
-  { name: "Rainer Schubert", role: "Solution architect software", affiliation: "deveritec GmbH" },
-  { name: "Norbert Hesse", role: "Engineer embedded software", affiliation: "deveritec GmbH" }
+  { name: "Mirko Riedel", role: "Director research & innovation", affiliation: "deveritec GmbH", photo: mirko },
+  { name: "Rainer Schubert", role: "Solution architect software", affiliation: "deveritec GmbH", photo: rainer },
+  { name: "Norbert Hesse", role: "Engineer embedded software", affiliation: "deveritec GmbH", photo: norbert }
 ]} />
