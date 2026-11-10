@@ -73,6 +73,6 @@ jobs:
             open --env-password sftp://$DEPLOY_USER@$DEPLOY_HOST;
             cd _astro;
             cd ..;
-            mirror --reverse --delete --verbose --exclude-glob .well-known/ dist/ ./ ;
+            mirror --reverse --delete --no-perms --parallel=4 --verbose --exclude-glob .well-known/ dist/ ./ ;
             bye
           "
