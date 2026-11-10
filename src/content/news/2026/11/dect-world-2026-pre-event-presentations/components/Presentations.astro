@@ -1,0 +1,102 @@
+---
+import { statSync } from "node:fs";
+import { Download } from "lucide-react";
+import zauberbox from "../oi-zauberbox.svg";
+
+interface Props {
+  /** Folder under `public/`, e.g. "/files/dect-world-2026/". */
+  dir: string;
+  items: { file: string; speaker: string; affiliation: string }[];
+}
+
+const { dir, items } = Astro.props;
+
+const size = (file: string) =>
+  `${(statSync(`public${dir}${file}`).size / 1e6).toFixed(1)} MB`;
+---
+
+<div class="not-prose">
+  <span class="icon"></span>
+  <ul>
+    {
+      items.map(({ file, speaker, affiliation }) => (
+        <li>
+          <a href={`${dir}${file}`} target="_blank">
+            <span class="who">
+              {speaker}
+              <span class="detail">{affiliation}</span>
+            </span>
+            <span class="detail size font-mono">PDF, {size(file)}</span>
+            <Download aria-hidden="true" />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style define:vars={{ icon: `url(${zauberbox.src})` }}>
+  div {
+    position: relative;
+    margin: 2em 0;
+    padding: 0.25em 1.5em;
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+  }
+  div::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: hsl(var(--card));
+  }
+  .icon {
+    position: absolute;
+    left: 50%;
+    bottom: -15.25em;
+    height: 26em;
+    aspect-ratio: 57.1 / 64;
+    transform: translateX(-50%);
+    mask: var(--icon) center / contain no-repeat;
+    background: hsl(var(--primary));
+    opacity: 0.08;
+    z-index: -1;
+  }
+  li + li {
+    border-top: 1px solid hsl(var(--border));
+  }
+  a {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 0.75em 0;
+  }
+  .who {
+    flex: 1;
+    font-weight: 600;
+  }
+  .detail {
+    display: block;
+    font-weight: normal;
+    color: hsl(var(--muted-foreground));
+  }
+  .size {
+    font-size: 0.875em;
+    white-space: nowrap;
+  }
+  a :global(svg) {
+    flex-shrink: 0;
+    width: 1.25em;
+    height: 1.25em;
+    color: hsl(var(--primary));
+  }
+  a:hover .who,
+  a:focus-visible .who {
+    color: hsl(var(--primary));
+  }
+  a:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+</style>
