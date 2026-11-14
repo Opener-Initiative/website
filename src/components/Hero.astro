@@ -1,0 +1,120 @@
+---
+import { ArrowRight, Github } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import openerLogoWhite from "@/assets/logo_primary_white.svg?url";
+---
+
+<section class="relative min-h-svh flex items-center justify-center overflow-clip">
+  {/* Background gradient */}
+  <div class="watermark absolute inset-0 bg-[image:var(--gradient-hero)]" aria-hidden="true" />
+
+  <div class="container relative z-10 px-4 py-20 text-center">
+    <div class="max-w-4xl mx-auto space-y-8">
+      {/* Main heading */}
+      <h1 class="text-5xl md:text-7xl font-bold text-primary-foreground tracking-tight">
+        <img
+          src={openerLogoWhite}
+          alt="Opener"
+          class="h-44 lg:h-64 w-auto mx-auto"
+        />
+      </h1>
+
+      {/* Subtitle */}
+      <p class="text-xl md:text-2xl text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed">
+        An <strong>open reference implementation</strong> of the NR+ protocol stack. From the community, for the community.
+      </p>
+
+      {/* CTA buttons */}
+      <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+        <a
+          href="#get-started"
+          class={cn(
+            buttonVariants({ variant: "hero", size: "xl" }),
+            "bg-primary-foreground text-foreground hover:bg-primary-foreground/90 hover:brightness-100",
+          )}
+        >
+          Get Started
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </a>
+        <a
+          href="https://github.com/Opener-Initiative"
+          target="_blank"
+          rel="noopener noreferrer"
+          class={cn(buttonVariants({ variant: "heroOutline", size: "xl" }))}
+        >
+          <Github className="mr-2 h-5 w-5" />
+          View on GitHub
+        </a>
+      </div>
+
+      {/* Stats */}
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 pt-12 max-w-4xl mx-auto">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary-foreground">Open Standard</div>
+          <div class="text-sm text-primary-foreground/70 mt-1">for mMTC and URLLC</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary-foreground">Open Source</div>
+          <div class="text-sm text-primary-foreground/70 mt-1">licensed under Apache 2.0</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary-foreground">Open Spectrum</div>
+          <div class="text-sm text-primary-foreground/70 mt-1">in the 1.9 GHz band</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Bottom wave */}
+  <div class="absolute bottom-[-1px] left-0 right-0" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+      <path
+        d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+        class="fill-background"
+      />
+    </svg>
+  </div>
+</section>
+
+<style>
+  /* Logomark in hairline outline behind the hero, drifting slightly on scroll. */
+  .watermark {
+    view-timeline: --watermark;
+  }
+
+  .watermark::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 112.5%;
+    aspect-ratio: 5 / 4;
+    background: url("../assets/logomark_outline.svg") center / contain no-repeat;
+    opacity: 0.12;
+    transform: translate(-50%, -50%) rotate(31deg);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .watermark::before {
+        animation-name: watermark-drift;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: --watermark;
+        animation-range: exit-crossing;
+      }
+    }
+  }
+
+  @keyframes watermark-drift {
+    from {
+      translate: 0 0;
+    }
+
+    to {
+      translate: 0 15%;
+    }
+  }
+</style>
