@@ -21,7 +21,7 @@ const { title, description, pubDate, image, imageAlt, imageCredit } =
 const { Content } = await render(entry);
 
 const ogImage = image
-  ? (await getImage({ src: image, width: 1200, format: "webp" })).src
+  ? (await getImage({ src: image, width: 1200, height: 630, fit: "cover" })).src
   : undefined;
 ---
 
@@ -46,6 +46,9 @@ const ogImage = image
             <Image
               src={image}
               alt={imageAlt ?? ""}
+              width={1200}
+              height={630}
+              fit="cover"
               class="w-full rounded-lg"
               loading="eager"
             />
