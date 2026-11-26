@@ -1,5 +1,5 @@
 ---
-title: "DECT NR+ materials from the RIOT Summit and Ariel OS Community Day now available"
+title: "DECT NR+ Materials from the RIOT Summit and Ariel OS Community Day Now Available"
 description: Slides and recordings of both DECT NR+ talks from the RIOT Summit and the Ariel OS Community Day in Grenoble are now online. One talk introduces the technology, the other shows how to use it.
 pubDate: 2026-10-13
 image: blender-frame-23557.png
